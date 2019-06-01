@@ -29,7 +29,8 @@
             android:gravity="center"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp"
-            android:text="@string/btnContinuer"/>
+            android:text="@string/btnContinuer"
+            android:id="@+id/btnContinuer"/>
 
     </LinearLayout>
 

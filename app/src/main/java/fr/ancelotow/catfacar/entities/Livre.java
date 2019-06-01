@@ -1,5 +1,7 @@
 package fr.ancelotow.catfacar.entities;
 
+import java.time.LocalDate;
+
 public class Livre {
 
     private long id;
@@ -7,18 +9,21 @@ public class Livre {
     private String auteur1;
     private String auteur2;
     private String edition;
+    private LocalDate commande;
 
     public Livre(){
         super();
     }
 
-    public Livre(long id, String nom, String auteur1, String auteur2, String edition) {
+    public Livre(long id, String nom, String auteur1, String auteur2, String edition,
+                 LocalDate commande) {
         super();
         this.id = id;
         this.nom = nom;
         this.auteur1 = auteur1;
         this.auteur2 = auteur2;
         this.edition = edition;
+        this.commande = commande;
     }
 
     public long getId() {
@@ -59,6 +64,14 @@ public class Livre {
 
     public void setEdition(String edition) {
         this.edition = edition;
+    }
+
+    public LocalDate getCommande() {
+        return commande;
+    }
+
+    public void setCommande(LocalDate commande) {
+        this.commande = commande;
     }
 
 }
