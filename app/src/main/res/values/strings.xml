@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Catfacar</string>
+
+    <string name="tvInfoCrea">
+        Première utilisation ?
+        Créez votre profil pour pouvoir commander et profiter au mieux de cette application.
+    </string>
+
+    <string name="btnHist">HISTORIQUE</string>
+    <string name="btnCommande">PASSER COMMANDE</string>
+    <string name="btnContinuer">CONTINUER</string>
 </resources>

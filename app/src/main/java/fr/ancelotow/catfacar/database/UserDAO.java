@@ -31,7 +31,7 @@ public class UserDAO{
             COL_NOM+" TEXT, \n" +
             COL_PRENOM+" TEXT, \n" +
             COL_TEL+" TEXT, \n" +
-            COL_EMAIL+" TEXT, \n" +
+            COL_EMAIL+" TEXT \n" +
             ");";
     private DAOBase maBase;
     private SQLiteDatabase db;
@@ -75,6 +75,9 @@ public class UserDAO{
             user.setTel(cur.getString(cur.getColumnIndex(COL_TEL)));
             user.setEmail(cur.getString(cur.getColumnIndex(COL_EMAIL)));
             cur.close();
+        }
+        else{
+            user = null;
         }
         return user;
     }
