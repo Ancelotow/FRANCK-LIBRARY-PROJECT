@@ -1,13 +1,12 @@
-package fr.ancelotow.franck_library_project;
+package fr.ancelotow.catfacar;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
 import android.widget.Toast;
 
-import fr.ancelotow.franck_library_project.Technique.Internet;
+import fr.ancelotow.catfacar.Technique.Internet;
 
 public class LoadActivity extends AppCompatActivity {
 

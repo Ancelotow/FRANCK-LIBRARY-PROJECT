@@ -1,4 +1,4 @@
-package fr.ancelotow.franck_library_project;
+package fr.ancelotow.catfacar;
 
 import org.junit.Test;
 
