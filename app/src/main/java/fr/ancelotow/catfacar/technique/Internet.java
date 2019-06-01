@@ -1,4 +1,4 @@
-package fr.ancelotow.catfacar.Technique;
+package fr.ancelotow.catfacar.technique;
 
 import android.app.Activity;
 import android.content.Context;

@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import fr.ancelotow.catfacar.Technique.Internet;
+import fr.ancelotow.catfacar.technique.Internet;
 
 public class LoadActivity extends AppCompatActivity {
 
