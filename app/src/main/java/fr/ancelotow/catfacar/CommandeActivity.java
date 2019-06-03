@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -99,13 +100,13 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
             @Override
             public void onClick(View v) {
                 if(etNom.getText().toString().equals("")){
-                    tvError.setText(error);
+                    mOutputText.setText(error);
                 }
                 else if(etAuteur1.getText().toString().equals("")){
-                    tvError.setText(error);
+                    mOutputText.setText(error);
                 }
                 else if(etEdition.getText().toString().equals("")){
-                    tvError.setText(error);
+                    mOutputText.setText(error);
                 }
                 else{
                     System.out.println("////////// MAIN //////////////////");
@@ -272,7 +273,8 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
         @Override
         protected List<String> doInBackground(Void... params) {
             try {
-                writeReservation();
+                int numRes = getNumRes();
+                writeReservation(numRes);
                 return getDataFromApi();
             } catch (Exception e) {
                 mLastError = e;
@@ -283,29 +285,45 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
 
         private List<String> getDataFromApi() throws IOException {
             String spreadsheetId = "1I6Hvtclv3avAQndP7jbTtl2bp67bNucuahPESdLzYn4";
-            System.out.println("///// API ////////////");
-            String range = "A2:B3";
+            String range = "A1:A2";
             List<String> results = new ArrayList<String>();
             ValueRange response = this.mService.spreadsheets().values()
                     .get(spreadsheetId, range)
                     .execute();
             List<List<Object>> values = response.getValues();
-            System.out.println("///// API22 ////////////");
             if (values != null) {
-                results.add("Name, Major");
                 for (List row : values) {
-                    results.add(row.get(0) + ", " + row.get(1));
-                    System.out.println("/////" + row.get(0) + "////////////");
+                    results.add("OK");
                 }
             }
             return results;
         }
 
-        private void writeReservation() throws IOException {
+        private int getNumRes() throws IOException {
             String spreadsheetId = "1I6Hvtclv3avAQndP7jbTtl2bp67bNucuahPESdLzYn4";
-            System.out.println("///// API23 ////////////");
+            System.out.println("///// API ////////////");
+            String range = "A2:I";
+            ValueRange response = this.mService.spreadsheets()
+                    .values()
+                    .get(spreadsheetId, range)
+                    .execute();
+            List<List<Object>> values = response.getValues();
+            System.out.println("///// API22 ////////////");
+            int max = 0;
+            if (values != null) {
+                for (List row : values) {
+                    if(((Integer) Integer.valueOf((String)row.get(0))) >= max){
+                        max = ((Integer) Integer.valueOf((String)row.get(0))) + 1;
+                    }
+                }
+            }
+            return max;
+        }
+
+        private void writeReservation(int numRes) throws IOException {
+            String spreadsheetId = "1I6Hvtclv3avAQndP7jbTtl2bp67bNucuahPESdLzYn4";
             String range = "A:I";
-            Object A = "TEST";
+            Object A = numRes;
             Object B = Session.getSession().getUser().getNom().toUpperCase();
             Object C = Session.getSession().getUser().getPrenom();
             Object D = Session.getSession().getUser().getTel();
@@ -333,12 +351,12 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
         @Override
         protected void onPostExecute(List<String> output) {
             mProgress.hide();
-            if (output == null || output.size() == 0) {
-                mOutputText.setText("No results returned.");
-            } else {
-                output.add(0, "Data retrieved using the Google Sheets API:");
-                mOutputText.setText(TextUtils.join("\n", output));
-            }
+            Toast.makeText(CommandeActivity.this,
+                    "Votre réservation à été prise en compte.",
+                    Toast.LENGTH_LONG).show();
+            Intent i = new Intent(CommandeActivity.this,
+                    MainActivity.class);
+            startActivity(i);
         }
 
         @Override
