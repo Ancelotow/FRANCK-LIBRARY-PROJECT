@@ -6,15 +6,23 @@
         Créez votre profil pour pouvoir commander et profiter au mieux de cette application.
     </string>
     <string name="tvFormUser">CREATION DE VOTRE PROFIL</string>
+    <string name="tvCommande">RESERVER UN LIVRE</string>
     <string name="tvChamps">TOUT LES CHAMPS SONT OBLIGATOIRES.</string>
+    <string name="tvChampsEtoile">TOUT LES CHAMPS AVEC UNE ETOILE (*) SONT OBLIGATOIRES.</string>
     <string name="tvNoms">NOM</string>
     <string name="tvPrenom">PRENOM</string>
     <string name="tvTel">TELEPHONE</string>
     <string name="tvMail">ADRESSE MAIL</string>
+    <string name="tvNomLivre">NOM DU LIVRE*</string>
+    <string name="tvAuteur1">AUTEUR N°1*</string>
+    <string name="tvAuteur2">AUTEUR N°2</string>
+    <string name="tvEdition">EDITION*</string>
 
-    <string name="btnHist">HISTORIQUE</string>
-    <string name="btnCommande">PASSER COMMANDE</string>
+    <string name="btnHist">HISTORIQUE DES RESERVATIONS</string>
+    <string name="btnCommande">RESERVER UN LIVRE</string>
     <string name="btnContinuer">CONTINUER</string>
     <string name="btnCreer">CREER</string>
+    <string name="btnReserver">RESERVER</string>
     <string name="btnAnnuler">ANNULER</string>
+    <string name="btnRetour">RETOUR</string>
 </resources>
