@@ -31,6 +31,8 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.sheets.v4.SheetsScopes;
+import com.google.api.services.sheets.v4.model.AppendValuesResponse;
+import com.google.api.services.sheets.v4.model.UpdateValuesResponse;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
 import java.io.File;
@@ -42,8 +44,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import fr.ancelotow.catfacar.technique.Session;
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -61,7 +66,7 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
     static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
 
     private static final String PREF_ACCOUNT_NAME = "owen.ancelot.sio";
-    private static final String[] SCOPES = { SheetsScopes.SPREADSHEETS_READONLY };
+    private static final String[] SCOPES = { SheetsScopes.SPREADSHEETS };
 
     TextView tvError;
     EditText etNom;
@@ -267,6 +272,7 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
         @Override
         protected List<String> doInBackground(Void... params) {
             try {
+                writeReservation();
                 return getDataFromApi();
             } catch (Exception e) {
                 mLastError = e;
@@ -293,6 +299,29 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
                 }
             }
             return results;
+        }
+
+        private void writeReservation() throws IOException {
+            String spreadsheetId = "1I6Hvtclv3avAQndP7jbTtl2bp67bNucuahPESdLzYn4";
+            System.out.println("///// API23 ////////////");
+            String range = "A:I";
+            Object A = "TEST";
+            Object B = Session.getSession().getUser().getNom().toUpperCase();
+            Object C = Session.getSession().getUser().getPrenom();
+            Object D = Session.getSession().getUser().getTel();
+            Object E = Session.getSession().getUser().getEmail();
+            Object F = etNom.getText().toString();
+            Object G = etAuteur1.getText().toString();
+            Object H = etAuteur2.getText().toString();
+            Object I = etEdition.getText().toString();
+            List<List<Object>> values = Arrays.asList(Arrays.asList(A, B, C, D, E, F, G, H, I));
+            ValueRange body = new ValueRange().setValues(values);
+            String valueInputOption = "RAW";
+            AppendValuesResponse result = mService.spreadsheets()
+                    .values()
+                    .append(spreadsheetId, range, body)
+                    .setValueInputOption(valueInputOption)
+                    .execute();
         }
 
         @Override
