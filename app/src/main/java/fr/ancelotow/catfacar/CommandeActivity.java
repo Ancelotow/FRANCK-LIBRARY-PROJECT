@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -84,6 +85,7 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
     EditText etEdition;
     Button btnRetour;
     Button btnReserver;
+    Livre livre;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -357,7 +359,7 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
                     .append(spreadsheetId, range, body)
                     .setValueInputOption(valueInputOption)
                     .execute();
-            Livre livre = new Livre();
+            livre = new Livre();
             livre.setNumRes(numRes);
             livre.setNom(etNom.getText().toString());
             livre.setAuteur1(etAuteur1.getText().toString());
@@ -376,11 +378,11 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
         @Override
         protected void onPostExecute(List<String> output) {
             mProgress.hide();
-            Toast.makeText(CommandeActivity.this,
-                    "Votre réservation à été prise en compte.",
-                    Toast.LENGTH_LONG).show();
+            Bundle pack = new Bundle();
+            pack.putString("numRes", String.valueOf(livre.getNumRes()));
             Intent i = new Intent(CommandeActivity.this,
-                    MainActivity.class);
+                    ResConfirm.class);
+            i.putExtras(pack);
             startActivity(i);
         }
 

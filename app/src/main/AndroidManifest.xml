@@ -23,8 +23,9 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".FirstUseActivity" />
         <activity android:name=".CreateUserActivity" />
-        <activity android:name=".CommandeActivity"></activity>
-        <activity android:name=".HistoriqueActivity"></activity>
+        <activity android:name=".CommandeActivity" />
+        <activity android:name=".HistoriqueActivity" />
+        <activity android:name=".ResConfirm"></activity>
     </application>
 
 </manifest>

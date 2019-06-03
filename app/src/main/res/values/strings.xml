@@ -5,6 +5,13 @@
         Première utilisation ?
         Créez votre profil pour pouvoir commander et profiter au mieux de cette application.
     </string>
+    <string name="tvResConfirm">
+        Votre réservation à bien été prise en compte. Votre numéro de réservation est le :
+    </string>
+    <string name="tvInfoRes">
+        Vous pouvez retrouver ce numéro dans votre historique des réservations.
+        Il est obligatoire pour pouvoir recupérez votre livre
+    </string>
     <string name="tvFormUser">CREATION DE VOTRE PROFIL</string>
     <string name="tvCommande">RESERVER UN LIVRE</string>
     <string name="tvChamps">TOUT LES CHAMPS SONT OBLIGATOIRES.</string>
@@ -25,6 +32,7 @@
     <string name="btnReserver">RESERVER</string>
     <string name="btnAnnuler">ANNULER</string>
     <string name="btnRetour">RETOUR</string>
+    <string name="btnRetourAcc">RETOURNER AU MENU</string>
 
     <string name="tabRes">RESERVATION</string>
     <string name="tabNom">NOM</string>
