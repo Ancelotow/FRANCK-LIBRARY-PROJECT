@@ -22,6 +22,7 @@ public class DAOBase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(UserDAO.CREATE_TABLE);
+        sqLiteDatabase.execSQL(LivreDAO.CREATE_TABLE);
     }
 
     @Override

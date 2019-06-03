@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Livre {
 
-    private long id;
+    private int numRes;
     private String nom;
     private String auteur1;
     private String auteur2;
@@ -15,10 +15,10 @@ public class Livre {
         super();
     }
 
-    public Livre(long id, String nom, String auteur1, String auteur2, String edition,
+    public Livre(int numRes, String nom, String auteur1, String auteur2, String edition,
                  LocalDate commande) {
         super();
-        this.id = id;
+        this.numRes = numRes;
         this.nom = nom;
         this.auteur1 = auteur1;
         this.auteur2 = auteur2;
@@ -26,12 +26,12 @@ public class Livre {
         this.commande = commande;
     }
 
-    public long getId() {
-        return id;
+    public int getNumRes() {
+        return numRes;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setNumRes(int numRes) {
+        this.numRes = numRes;
     }
 
     public String getNom() {
@@ -72,6 +72,11 @@ public class Livre {
 
     public void setCommande(LocalDate commande) {
         this.commande = commande;
+    }
+
+    @Override
+    public String toString(){
+        return String.valueOf(numRes);
     }
 
 }

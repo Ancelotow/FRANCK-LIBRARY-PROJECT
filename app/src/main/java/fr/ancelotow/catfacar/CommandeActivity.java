@@ -9,12 +9,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +47,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -51,6 +57,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import fr.ancelotow.catfacar.database.LivreDAO;
+import fr.ancelotow.catfacar.entities.Livre;
 import fr.ancelotow.catfacar.technique.Session;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -77,6 +85,7 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
     Button btnRetour;
     Button btnReserver;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -270,11 +279,16 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
                     .build();
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         protected List<String> doInBackground(Void... params) {
             try {
                 int numRes = getNumRes();
-                writeReservation(numRes);
+                Livre livre = writeReservation(numRes);
+                LivreDAO db = new LivreDAO(CommandeActivity.this);
+                db.ouvrir();
+                db.addLivre(livre);
+                db.fermer();
                 return getDataFromApi();
             } catch (Exception e) {
                 mLastError = e;
@@ -320,9 +334,11 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
             return max;
         }
 
-        private void writeReservation(int numRes) throws IOException {
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        private Livre writeReservation(int numRes) throws IOException {
             String spreadsheetId = "1I6Hvtclv3avAQndP7jbTtl2bp67bNucuahPESdLzYn4";
             String range = "A:I";
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("d/MM/uuuu");
             Object A = numRes;
             Object B = Session.getSession().getUser().getNom().toUpperCase();
             Object C = Session.getSession().getUser().getPrenom();
@@ -332,7 +348,8 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
             Object G = etAuteur1.getText().toString();
             Object H = etAuteur2.getText().toString();
             Object I = etEdition.getText().toString();
-            List<List<Object>> values = Arrays.asList(Arrays.asList(A, B, C, D, E, F, G, H, I));
+            Object J = LocalDate.now().format(df);
+            List<List<Object>> values = Arrays.asList(Arrays.asList(A, B, C, D, E, F, G, H, I, J));
             ValueRange body = new ValueRange().setValues(values);
             String valueInputOption = "RAW";
             AppendValuesResponse result = mService.spreadsheets()
@@ -340,6 +357,14 @@ public class CommandeActivity extends AppCompatActivity implements EasyPermissio
                     .append(spreadsheetId, range, body)
                     .setValueInputOption(valueInputOption)
                     .execute();
+            Livre livre = new Livre();
+            livre.setNumRes(numRes);
+            livre.setNom(etNom.getText().toString());
+            livre.setAuteur1(etAuteur1.getText().toString());
+            livre.setAuteur2(etAuteur2.getText().toString());
+            livre.setEdition(etEdition.getText().toString());
+            livre.setCommande(LocalDate.now());
+            return livre;
         }
 
         @Override

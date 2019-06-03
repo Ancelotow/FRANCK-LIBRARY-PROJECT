@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import fr.ancelotow.catfacar.technique.Session;
 
@@ -29,6 +30,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         };
+        View.OnClickListener historiser = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,
+                        HistoriqueActivity.class);
+                startActivity(i);
+            }
+        };
         btnCommande.setOnClickListener(commander);
+        btnHist.setOnClickListener(historiser);
     }
 }

@@ -24,6 +24,7 @@
         <activity android:name=".FirstUseActivity" />
         <activity android:name=".CreateUserActivity" />
         <activity android:name=".CommandeActivity"></activity>
+        <activity android:name=".HistoriqueActivity"></activity>
     </application>
 
 </manifest>

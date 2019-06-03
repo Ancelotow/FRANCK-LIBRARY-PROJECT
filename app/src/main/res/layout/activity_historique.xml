@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".HistoriqueActivity">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/style_head_table"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="9dp"
+                    android:text="@string/tabRes"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/style_head_table"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="9dp"
+                    android:text="@string/tabNom"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/style_head_table"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="9dp"
+                    android:text="@string/tabAuteur1"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/style_head_table"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="9dp"
+                    android:text="@string/tabAuteur2"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/style_head_table"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="9dp"
+                    android:text="@string/tabEdition"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/style_head_table"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="9dp"
+                    android:text="@string/tabDate"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="500dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:scrollbars="vertical"
+                android:id="@+id/lvLivres">
+
+
+            </ListView>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/opt_button"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/btnRetour"
+            android:id="@+id/btnRetour"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

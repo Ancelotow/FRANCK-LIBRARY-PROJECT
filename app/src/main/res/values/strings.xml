@@ -25,4 +25,11 @@
     <string name="btnReserver">RESERVER</string>
     <string name="btnAnnuler">ANNULER</string>
     <string name="btnRetour">RETOUR</string>
+
+    <string name="tabRes">RESERVATION</string>
+    <string name="tabNom">NOM</string>
+    <string name="tabAuteur1">AUTEUR N°1</string>
+    <string name="tabAuteur2">AUTEUR N°2</string>
+    <string name="tabEdition">EDITION</string>
+    <string name="tabDate">DATE</string>
 </resources>
